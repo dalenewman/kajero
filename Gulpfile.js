@@ -41,6 +41,7 @@ function bundle() {
         })
         .pipe(source('bundle.js'))
         .pipe(gulp.dest('./src/dist'))
+        .pipe(gulp.dest('c:\\Code\\Orchard.Source.1.8.1\\src\\Orchard.Web\\Modules\\Kajero\\Scripts'))
         .pipe(browserSync.stream({once: true}));
 }
 
@@ -60,6 +61,7 @@ gulp.task('sass', function() {
             gutil.log(err.message);
         })
         .pipe(gulp.dest('./src/dist'))
+        .pipe(gulp.dest('c:\\Code\\Orchard.Source.1.8.1\\src\\Orchard.Web\\Modules\\Kajero\\Styles'))
         .pipe(browserSync.stream({once: true}));
 });
 

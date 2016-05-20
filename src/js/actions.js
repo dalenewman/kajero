@@ -28,6 +28,7 @@ export const UPDATE_GRAPH_BLOCK_PROPERTY = 'UPDATE_GRAPH_BLOCK_PROPERTY';
 export const UPDATE_GRAPH_BLOCK_HINT = 'UPDATE_GRAPH_BLOCK_HINT';
 export const UPDATE_GRAPH_BLOCK_LABEL = 'UPDATE_GRAPH_BLOCK_LABEL';
 export const CLEAR_GRAPH_BLOCK_DATA = 'CLEAR_GRAPH_BLOCK_DATA';
+export const ORCHARD_SAVED = 'ORCHARD_SAVED';
 
 function checkStatus (response) {
     if (response.status >= 200 && response.status < 300) {
@@ -230,6 +231,14 @@ function gistCreated(id) {
     };
 }
 
+function orchardSaved(response){
+    console.log("orchardSaved");
+    return {
+        type: ORCHARD_SAVED,
+        response
+    };
+}
+
 export function saveGist (title, markdown) {
     return (dispatch, getState) => {
         fetch(gistApi, {
@@ -250,6 +259,28 @@ export function saveGist (title, markdown) {
         })
         .then(response => response.json())
         .then(gist => dispatch(gistCreated(gist.id)));
+    };
+};
+
+export function saveOrchard (markdown, close) {
+    console.log("saveOrchard");
+    document.getElementById("id_markdown").value = markdown;
+    return (dispatch, getState) => {
+        var dataSend = $("#id_save").serialize();
+        $.post(
+            "../Kajero/Save", 
+            dataSend,
+            function( dataReceive ) {
+                if (dataReceive.Status === 200) {
+                    console.log('saved');
+                    close();
+                } else {
+                    console.log(dataReceive);
+                    alert(dataReceive.Message);
+                }
+            }, 
+            "json"
+        );
     };
 };
 

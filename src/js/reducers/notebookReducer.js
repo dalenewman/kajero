@@ -19,7 +19,8 @@ import {
     UPDATE_GRAPH_BLOCK_PROPERTY,
     UPDATE_GRAPH_BLOCK_HINT,
     UPDATE_GRAPH_BLOCK_LABEL,
-    CLEAR_GRAPH_BLOCK_DATA
+    CLEAR_GRAPH_BLOCK_DATA,
+    ORCHARD_SAVED
 } from '../actions';
 
 /*
@@ -113,6 +114,8 @@ export default function notebook(state = initialState, action) {
             );
         case GIST_CREATED:
             return state.setIn(['metadata', 'gistUrl'], kajeroHomepage + '?id=' + id);
+        case ORCHARD_SAVED:
+            return;
         case UNDO:
             return undo(state);
         case CHANGE_CODE_BLOCK_OPTION:

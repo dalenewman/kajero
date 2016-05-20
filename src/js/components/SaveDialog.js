@@ -6,6 +6,7 @@ import { render } from '../markdown';
 import { toggleSave } from '../actions';
 import { renderHTML } from '../util';
 import { saveGist } from '../actions';
+import { saveOrchard } from '../actions';
 
 class SaveDialog extends Component {
 
@@ -61,6 +62,12 @@ class SaveDialog extends Component {
                 render(this.props.notebook)
             ));
         }
+        
+        if(newMode === 'orchard'){
+            console.log("setMode (orchard)");
+            this.props.dispatch(saveOrchard(render(this.props.notebook), this.close));
+        }
+
     }
 
     render() {
@@ -106,8 +113,11 @@ class SaveDialog extends Component {
                 <span className={this.getCssClass('html')} onClick={() => this.setMode('html')}>
                     <i className="fa fa-code"></i> HTML
                 </span>
-                <span className={this.getCssClass('gist')} onClick={() => this.setMode('gist')}>
+                {/* <span className={this.getCssClass('gist')} onClick={() => this.setMode('gist')}>
                     <i className="fa fa-github"></i> Export to Gist
+                </span> */}
+                <span className={this.getCssClass('gist')} onClick={() => this.setMode('orchard')}>
+                    <i className="fa fa-floppy-o"></i> Save to Orchard CMS
                 </span>
                 {this.state.mode === 'gist' ? gistContent : textContent}
                 <div className="footer">&nbsp;</div>
