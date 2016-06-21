@@ -117,7 +117,7 @@ class SaveDialog extends Component {
                     <i className="fa fa-github"></i> Export to Gist
                 </span> */}
                 <span className={this.getCssClass('gist')} onClick={() => this.setMode('orchard')}>
-                    <i className="fa fa-floppy-o"></i> Save to Orchard CMS
+                    <i className="fa fa-floppy-o"></i> Save
                 </span>
                 {this.state.mode === 'gist' ? gistContent : textContent}
                 <div className="footer">&nbsp;</div>
